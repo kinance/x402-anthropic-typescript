@@ -1,0 +1,36 @@
+{
+  "name": "@kinance/x402-anthropic",
+  "version": "0.1.0",
+  "description": "x402 payment transport for the Anthropic TypeScript SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["anthropic", "x402", "payments", "claude", "http402"],
+  "license": "MIT",
+  "dependencies": {
+    "@x402/fetch": "^2.5.0"
+  },
+  "optionalDependencies": {
+    "@x402/evm": "^2.3.0",
+    "@x402/svm": "^2.3.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "@types/node": "^20.0.0"
+  },
+  "peerDependencies": {
+    "@anthropic-ai/sdk": ">=0.40.0"
+  }
+}
