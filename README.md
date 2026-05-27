@@ -1,6 +1,6 @@
 # x402-anthropic-typescript
 
-[![npm](https://img.shields.io/npm/v/@kinance/x402-anthropic)](https://www.npmjs.com/package/@kinance/x402-anthropic)
+[![npm](https://img.shields.io/npm/v/@0xkinance/x402-anthropic)](https://www.npmjs.com/package/@0xkinance/x402-anthropic)
 [![TypeScript](https://img.shields.io/badge/typescript-5.0+-blue)](https://typescriptlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/kinance/x402-anthropic-typescript/blob/main/LICENSE)
 [![CI](https://github.com/kinance/x402-anthropic-typescript/actions/workflows/node.yml/badge.svg)](https://github.com/kinance/x402-anthropic-typescript/actions)
@@ -12,15 +12,15 @@ Wrap the standard `Anthropic` client with a crypto wallet. When the server respo
 ## Install
 
 ```bash
-npm install @kinance/x402-anthropic @x402/evm viem        # EVM (Base, Ethereum)
-npm install @kinance/x402-anthropic @x402/svm @solana/kit  # SVM (Solana)
-npm install @kinance/x402-anthropic @x402/evm @x402/svm viem @solana/kit  # all chains
+npm install @0xkinance/x402-anthropic @x402/evm viem        # EVM (Base, Ethereum)
+npm install @0xkinance/x402-anthropic @x402/svm @solana/kit  # SVM (Solana)
+npm install @0xkinance/x402-anthropic @x402/evm @x402/svm viem @solana/kit  # all chains
 ```
 
 ## Quick start
 
 ```ts
-import { X402Anthropic, EVMWallet } from "@kinance/x402-anthropic";
+import { X402Anthropic, EVMWallet } from "@0xkinance/x402-anthropic";
 
 const client = new X402Anthropic({
   wallet: new EVMWallet("0x..."),
@@ -55,7 +55,7 @@ for await (const text of stream.textStream) {
 ### Payment policies
 
 ```ts
-import { X402Anthropic, EVMWallet, preferNetwork, maxAmount } from "@kinance/x402-anthropic";
+import { X402Anthropic, EVMWallet, preferNetwork, maxAmount } from "@0xkinance/x402-anthropic";
 
 const client = new X402Anthropic({
   wallet: new EVMWallet("0x..."),

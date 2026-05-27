@@ -1,5 +1,5 @@
 {
-  "name": "@kinance/x402-anthropic",
+  "name": "@0xkinance/x402-anthropic",
   "version": "0.1.0",
   "description": "x402 payment transport for the Anthropic TypeScript SDK",
   "main": "dist/index.js",
