@@ -64,6 +64,8 @@ const client = new X402Anthropic({
 });
 ```
 
+> **Safety**: use a dedicated wallet with limited funds and always set a `maxAmount` policy before pointing this at an untrusted gateway.
+
 ## API reference
 
 ### `X402Anthropic`

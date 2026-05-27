@@ -27,6 +27,6 @@ export function maxAmount(maxUnits: bigint | number): Policy {
       );
       return amount <= max;
     });
-    return affordable.length > 0 ? affordable : reqs;
+    return affordable;
   };
 }
