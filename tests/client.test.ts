@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { x402Client } from "@x402/fetch";
 import { X402Anthropic } from "../src/index.js";
-import { preferNetwork } from "../src/policies.js";
+import { preferNetwork, maxAmount } from "../src/policies.js";
 
 // ---------------------------------------------------------------------------
 // Constructor / config
@@ -129,5 +129,45 @@ describe("preferNetwork policy", () => {
     const reqs = [{ network: eth }, { network: "eip155:137" }] as Parameters<typeof policy>[1];
     const result = policy(2, reqs);
     expect(result).toHaveLength(2);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// maxAmount policy
+// ---------------------------------------------------------------------------
+
+describe("maxAmount policy", () => {
+  type Req = Parameters<ReturnType<typeof maxAmount>>[1][number];
+  const makeReq = (amount: string): Req => ({ amount } as Req);
+
+  it("returns only affordable requirements when some exceed the cap", () => {
+    const policy = maxAmount(1_000_000n);
+    const reqs = [makeReq("500000"), makeReq("1000000"), makeReq("2000000")];
+    const result = policy(2, reqs);
+    expect(result).toHaveLength(2);
+    expect(result.map((r) => (r as { amount: string }).amount)).toEqual(["500000", "1000000"]);
+  });
+
+  it("returns all requirements when all are within the cap", () => {
+    const policy = maxAmount(1_000_000n);
+    const reqs = [makeReq("100"), makeReq("999999")];
+    const result = policy(2, reqs);
+    expect(result).toHaveLength(2);
+  });
+
+  it("returns empty array when all requirements exceed the cap (hard limit)", () => {
+    const policy = maxAmount(500n);
+    const reqs = [makeReq("1000"), makeReq("2000")];
+    const result = policy(2, reqs);
+    // Empty return signals to x402Client that no affordable option exists —
+    // the client throws "All payment requirements were filtered out by policies".
+    expect(result).toHaveLength(0);
+  });
+
+  it("falls back to maxAmountRequired field when amount is absent", () => {
+    const policy = maxAmount(1_000_000n);
+    const req = { maxAmountRequired: "500000" } as Req;
+    const result = policy(2, [req]);
+    expect(result).toHaveLength(1);
   });
 });
